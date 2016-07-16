@@ -71,4 +71,7 @@ sub vcl_init {
 
 sub vcl_recv {
 	set req.backend_hint = vdir.backend();
+	if (req.url ~ "^/wp-admin") {
+		return (pass);
+	}
 }
