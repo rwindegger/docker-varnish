@@ -8,9 +8,10 @@ import directors;
 		{{ if and .Container.Node.ID .Address.HostPort }}
 backend {{ .Container.Name }} {
 	# {{ .Container.Node.Name }}/{{ .Container.Name }}
-	.host = "{{ .Container.Node.Address.IP }}:{{ .Address.HostPort }}";
+	.host = "{{ .Container.Node.Address.IP }}";
+	.port = "{{ .Address.HostPort }}";
 	.probe = {
-		.url = "/";
+		.url = "/index.php";
 		.timeout = 1s;
 		.interval = 5s;
 		.window = 5;
@@ -21,9 +22,10 @@ backend {{ .Container.Name }} {
 		{{ else if .Network }}
 backend {{ .Container.Name }} {
 	# {{ .Container.Name }}
-	.host="{{ .Network.IP }}:{{ .Address.Port }}";
+	.host = "{{ .Network.IP }}";
+	.port = "{{ .Address.Port }}";
 	.probe = {
-		.url = "/";
+		.url = "/index.php";
 		.timeout = 1s;
 		.interval = 5s;
 		.window = 5;
