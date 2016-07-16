@@ -19,6 +19,6 @@ if [ "$socketMissing" = 1 -a "$1" = forego -a "$2" = start -a "$3" = '-r' ]; the
 	exit 1
 fi
 
-docker-gen /opt/scripts/varnish.tmpl /etc/varnish/varnish.vcl
+docker-gen /opt/scripts/varnish.tmpl /etc/varnish/default.vcl
 
 exec "$@"
