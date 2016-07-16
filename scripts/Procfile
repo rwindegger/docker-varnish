@@ -1,0 +1,2 @@
+varnishd: varnishd -j unix,user=varnishd -F -f /etc/varnish/default.vcl -s malloc,${VARNISH_MEMORY} -a 0.0.0.0:${VARNISH_PORT} -p http_req_hdr_len=16384 -p http_resp_hdr_len=16384 ${VARNISH_DAEMON_OPTS}
+dockergen: docker-gen -watch -notify "/usr/bin/varnish_reload_vcl" /opt/scripts/varnish.tmpl /etc/varnish/default.vcl
