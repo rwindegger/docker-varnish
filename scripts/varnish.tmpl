@@ -1,4 +1,5 @@
 {{ $CurrentContainer := where $ "ID" .Docker.CurrentContainerID | first }}
+vcl 4.0;
 import directors;
 
 {{ define "backend" }}
