@@ -64,7 +64,13 @@ sub vcl_init {
 	new vdir = directors.round_robin();
 {{ range $host, $containers := groupByMulti $ "Env.BACKEND_HOST" "," }}
 {{ range $container := $containers }}
+	{{ range $knownNetwork := $CurrentContainer.Networks }}
+			{{ range $containerNetwork := $container.Networks }}
+				{{ if eq $knownNetwork.Name $containerNetwork.Name }}
 	vdir.add_backend({{ $container.Name }});
+				{{ end }}
+		{{ end }}
+	{{ end }}
 {{ end }}
 {{ end }}
 }
